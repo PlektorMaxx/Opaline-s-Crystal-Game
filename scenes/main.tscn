@@ -1,0 +1,33 @@
+[gd_scene load_steps=4 format=3 uid="uid://bvnxbys7bqos1"]
+
+[ext_resource type="Texture2D" uid="uid://b8ep2q63xhno4" path="res://assets/background.png" id="2_bk84n"]
+[ext_resource type="Script" path="res://scripts/crystal.gd" id="3_h1ojo"]
+[ext_resource type="PackedScene" uid="uid://dhbxui6cwj0eb" path="res://scenes/menu_button.tscn" id="3_pph8b"]
+
+[node name="main" type="Node2D"]
+
+[node name="crystal" type="Node2D" parent="."]
+script = ExtResource("3_h1ojo")
+metadata/_edit_group_ = true
+
+[node name="Timer" type="Timer" parent="crystal"]
+
+[node name="crystalSprite" type="Sprite2D" parent="crystal"]
+
+[node name="rareTrait" type="Node2D" parent="crystal"]
+
+[node name="traitSprite" type="Sprite2D" parent="crystal/rareTrait"]
+
+[node name="GameEvents" type="Node" parent="."]
+
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(500, 375)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_bk84n")
+
+[node name="MenuButton" parent="." instance=ExtResource("3_pph8b")]
+offset_left = 16.0
+offset_top = 559.0
+offset_right = 266.0
+offset_bottom = 739.0
+button_pressed = true
