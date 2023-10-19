@@ -1,13 +1,12 @@
 extends MenuButton
 
-@export var crystalType: int = item_count
+@onready var popup_menu
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	popup_menu = get_popup()
+	popup_menu.connect("id_pressed", item_pressed)
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
-	
+func item_pressed(id):
+	print(popup_menu.get_item_text(id))
+	GlobalVars.item_id = id
+	GlobalVars.menuSelection.emit()

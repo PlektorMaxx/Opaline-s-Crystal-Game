@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://cpv578jpvdobf"]
+
+[ext_resource type="Script" path="res://scripts/crystal.gd" id="1_g3fsg"]
+[ext_resource type="Script" path="res://scripts/Timer.gd" id="2_u2mq1"]
+
+[node name="crystal" type="Node2D"]
+position = Vector2(505, 385)
+script = ExtResource("1_g3fsg")
+metadata/_edit_group_ = true
+
+[node name="Timer" type="Timer" parent="."]
+script = ExtResource("2_u2mq1")
+
+[node name="crystalSprite" type="Sprite2D" parent="."]
+
+[node name="rareTrait" type="Node2D" parent="."]
+
+[node name="traitSprite" type="Sprite2D" parent="rareTrait"]
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
