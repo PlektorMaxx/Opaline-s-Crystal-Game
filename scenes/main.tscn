@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://bvnxbys7bqos1"]
+[gd_scene load_steps=8 format=3 uid="uid://bvnxbys7bqos1"]
 
 [ext_resource type="PackedScene" uid="uid://cpv578jpvdobf" path="res://scenes/crystal.tscn" id="2_3ebe0"]
 [ext_resource type="Texture2D" uid="uid://b8ep2q63xhno4" path="res://assets/background.png" id="2_bk84n"]
@@ -6,6 +6,14 @@
 [ext_resource type="PackedScene" uid="uid://dhbxui6cwj0eb" path="res://scenes/menu_button.tscn" id="3_pph8b"]
 
 [sub_resource type="GDScript" id="GDScript_ty4gg"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_oqhng"]
+font_size = 70
+font_color = Color(0.305882, 0.184314, 0.529412, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_c4clh"]
+font_size = 36
+font_color = Color(0.305882, 0.184314, 0.529412, 1)
 
 [node name="main" type="Node2D"]
 
@@ -23,6 +31,23 @@ script = ExtResource("3_nfd6n")
 
 [node name="crystal" parent="GamePlay" instance=ExtResource("2_3ebe0")]
 position = Vector2(500, 375)
+
+[node name="rareLabel" type="Label" parent="GamePlay/crystal"]
+offset_left = -89.0
+offset_top = 236.0
+offset_right = 86.0
+offset_bottom = 335.0
+label_settings = SubResource("LabelSettings_oqhng")
+horizontal_alignment = 1
+
+[node name="waitingLabel" type="Label" parent="GamePlay/crystal"]
+offset_left = -80.0
+offset_top = -198.0
+offset_right = 89.0
+offset_bottom = -145.0
+label_settings = SubResource("LabelSettings_c4clh")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="MenuButton" parent="GamePlay" instance=ExtResource("3_pph8b")]
 offset_left = 16.0

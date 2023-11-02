@@ -9,6 +9,7 @@ script = ExtResource("1_g3fsg")
 metadata/_edit_group_ = true
 
 [node name="Timer" type="Timer" parent="."]
+one_shot = true
 script = ExtResource("2_u2mq1")
 
 [node name="crystalSprite" type="Sprite2D" parent="."]
@@ -20,5 +21,7 @@ script = ExtResource("2_u2mq1")
 [node name="traitTwo" type="Sprite2D" parent="rareTrait"]
 
 [node name="detailSprite" type="Sprite2D" parent="."]
+
+[node name="shadeSprite" type="Sprite2D" parent="."]
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

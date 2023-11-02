@@ -3,22 +3,16 @@ extends Node2D
 
 #function that activates crystal sprite change
 func _ready():
-	GlobalVars.menuSelection.connect(spawnCrystal)
+	GlobalVars.menuSelection.connect(createCrystal)
+
+#timer function
+func _on_timer_timeout():
+	spawnCrystal()
+	$waitingLabel.text = ""
 
 func spawnCrystal():
 	var rng = RandomNumberGenerator.new()
 	rng.randomize()
-	var r = rng.randf()
-	var g = rng.randf()
-	var b = rng.randf()
-	$crystalSprite.self_modulate = Color(r, g, b)
-	$rareTrait/traitOne.self_modulate = Color(r, g, b)
-	
-	#rerandomizing the color so the multicolor actually shows up
-	r = rng.randf()
-	g = rng.randf()
-	b = rng.randf()
-	$rareTrait/traitTwo.self_modulate = Color(r, g, b)
 	
 	var one = false
 	var two = false
@@ -30,33 +24,66 @@ func spawnCrystal():
 		two = true
 	if(rng.randf() > 0.9):
 		three = true
-	
-	#changing the timer's time based on itemId
-	changeTime(GlobalVars.item_id)
-	#and making sure the final texture is right
+	#call timer function
+
+	randomTrait(one, two, three, GlobalVars.item_id)
 	change_texture(GlobalVars.item_id)
-	
-	#remove old traits
+
+func createCrystal():
+	#remove old stuff
+	$crystalSprite.texture = null;
+	$shadeSprite.texture = null;
+	$detailSprite.texture = null;
 	$rareTrait/traitOne.texture = null;
 	$rareTrait/traitTwo.texture = null;
+	
 	get_node("crystalSprite").set_flip_v(false)
+	get_node("shadeSprite").set_flip_v(false)
+	get_node("detailSprite").set_flip_v(false)
 	get_node("rareTrait/traitOne").set_flip_v(false)
 	get_node("rareTrait/traitTwo").set_flip_v(false)
+	$rareLabel.text = ""
 	
-	#generate new traits
-	randomTrait(one, two, three, GlobalVars.item_id)
+	var rng = RandomNumberGenerator.new()
+	rng.randomize()
+	var r = rng.randf()
+	var g = rng.randf()
+	var b = rng.randf()
+	$crystalSprite.self_modulate = Color(r, g, b)
+	$shadeSprite.self_modulate = Color(r, g, b)
+	$rareTrait/traitOne.self_modulate = Color(r, g, b)
+	
+	#rerandomizing the color so the multicolor actually shows up
+	r = rng.randf()
+	g = rng.randf()
+	b = rng.randf()
+	$rareTrait/traitTwo.self_modulate = Color(r, g, b)
+	
+	#changing the timer's time based on itemId
+	var time = changeTime(GlobalVars.item_id)
+	
+	$Timer.wait_time = time;
+	$Timer.start();
+	$waitingLabel.text = "Waiting..."
+
 
 func change_texture(itemNo) :
 	if(itemNo == 0):
 		$crystalSprite.texture = load("res://assets/quartz-big.png");
+		$shadeSprite.texture = load("res://assets/quartz-big-shade.png");
 	elif(itemNo == 1):
 		$crystalSprite.texture = load("res://assets/emerald-big.png");
+		$shadeSprite.texture = load("res://assets/emerald-big-shade.png");
 	elif(itemNo == 2):
 		$crystalSprite.texture = load("res://assets/opal-big.png");
+		$shadeSprite.texture = load("res://assets/opal-uncolored-shade.png"); #naming inconsistency i know. whoops
+		$detailSprite.texture = load("res://assets/opal-uncolored-details.png");
 	elif(itemNo == 3):
 		$crystalSprite.texture = load("res://assets/sapphirre-big.png");
+		$shadeSprite.texture = load("res://assets/sapphirre-big-shade.png");
 	elif(itemNo == 4):
 		$crystalSprite.texture = load("res://assets/onyx-big.png");
+		$shadeSprite.texture = load("res://assets/onyx-big-shade.png");
 
 static func changeTime(itemNo):
 	var waitTime = -1;
@@ -79,6 +106,7 @@ static func changeTime(itemNo):
 
 func randomTrait(one, two, three, itemNo):
 	if(one):
+		$rareLabel.text = "Rare!"
 		if(itemNo == 0):
 			$rareTrait/traitOne.texture = load("res://assets/quartz-rare1-big.png");
 			print("-quartz 1")
@@ -95,6 +123,7 @@ func randomTrait(one, two, three, itemNo):
 			$rareTrait/traitOne.texture = load("res://assets/onyx-rare1-big.png");
 			print("-onyx 1")
 	if(two):
+		$rareLabel.text = "Rare!"
 		if(itemNo == 0):
 			$rareTrait/traitTwo.texture = load("res://assets/quartz-rare2-big.png");
 			print("-quartz 2")
@@ -111,7 +140,10 @@ func randomTrait(one, two, three, itemNo):
 			$rareTrait/traitTwo.texture = load("res://assets/onyx-rare2-big.png");
 			print("-onyx 2")
 	if(three):
+		$rareLabel.text = "Rare!"
 		get_node("crystalSprite").set_flip_v(true)
+		get_node("shadeSprite").set_flip_v(true)
+		get_node("detailSprite").set_flip_v(true)
 		get_node("rareTrait/traitOne").set_flip_v(true)
 		get_node("rareTrait/traitTwo").set_flip_v(true)
 		

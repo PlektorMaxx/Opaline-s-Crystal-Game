@@ -1,10 +1,5 @@
-[gd_scene load_steps=8 format=3 uid="uid://dhbxui6cwj0eb"]
+[gd_scene load_steps=3 format=3 uid="uid://dhbxui6cwj0eb"]
 
-[ext_resource type="Texture2D" uid="uid://c4xav64amlwqb" path="res://assets/quartz-small.png" id="1_cx57l"]
-[ext_resource type="Texture2D" uid="uid://bfbegsg1daxoc" path="res://assets/emerald-small.png" id="2_3gh08"]
-[ext_resource type="Texture2D" uid="uid://mg2c8wdql7iv" path="res://assets/sapphirre-small.png" id="4_56rv1"]
-[ext_resource type="Texture2D" uid="uid://g32di684vvks" path="res://assets/opal-small.png" id="5_25cs8"]
-[ext_resource type="Texture2D" uid="uid://d3qv82unfxlft" path="res://assets/onyx-small.png" id="5_ladea"]
 [ext_resource type="Script" path="res://scripts/MenuButton.gd" id="6_0cf5v"]
 [ext_resource type="Texture2D" uid="uid://r27iieikgqq0" path="res://assets/crystalsButton.png" id="7_hs7hg"]
 
@@ -13,19 +8,14 @@ offset_right = 250.0
 offset_bottom = 180.0
 item_count = 5
 popup/item_0/text = "Quartz"
-popup/item_0/icon = ExtResource("1_cx57l")
 popup/item_0/id = 0
 popup/item_1/text = "Emerald"
-popup/item_1/icon = ExtResource("2_3gh08")
 popup/item_1/id = 1
 popup/item_2/text = "Opal"
-popup/item_2/icon = ExtResource("5_25cs8")
 popup/item_2/id = 2
 popup/item_3/text = "Sapphire"
-popup/item_3/icon = ExtResource("4_56rv1")
 popup/item_3/id = 3
 popup/item_4/text = "Onyx"
-popup/item_4/icon = ExtResource("5_ladea")
 popup/item_4/id = 4
 script = ExtResource("6_0cf5v")
 
