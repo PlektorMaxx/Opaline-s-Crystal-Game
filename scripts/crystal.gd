@@ -3,34 +3,60 @@ extends Node2D
 
 #function that activates crystal sprite change
 func _ready():
+	$sparkleAnim.hide()
 	GlobalVars.menuSelection.connect(createCrystal)
 
 #timer function
 func _on_timer_timeout():
 	spawnCrystal()
 	$waitingLabel.text = ""
+	GlobalVars.done.emit()
+	$sparkleAnim.show()
+	$sparkleAnim.play("sparkle")
+	$keepButton.show()
+	$deleteButton.show()
 
 func spawnCrystal():
 	var rng = RandomNumberGenerator.new()
 	rng.randomize()
 	
-	var one = false
-	var two = false
-	var three = false
-	
 	if(rng.randf() > 0.8):
-		one = true
+		GlobalVars.one = true
 	if(rng.randf() > 0.85):
-		two = true
+		GlobalVars.two = true
 	if(rng.randf() > 0.9):
-		three = true
-	#call timer function
-
-	randomTrait(one, two, three, GlobalVars.item_id)
+		GlobalVars.three = true
+	
+	randomTrait(GlobalVars.one, GlobalVars.two, GlobalVars.three, GlobalVars.item_id)
 	change_texture(GlobalVars.item_id)
 
 func createCrystal():
+	clearCrystal()
+	var rng = RandomNumberGenerator.new()
+	rng.randomize()
+	GlobalVars.r = rng.randf()
+	GlobalVars.g = rng.randf()
+	GlobalVars.b = rng.randf()
+	$crystalSprite.self_modulate = Color(GlobalVars.r, GlobalVars.g, GlobalVars.b)
+	$shadeSprite.self_modulate = Color(GlobalVars.r, GlobalVars.g, GlobalVars.b)
+	$rareTrait/traitOne.self_modulate = Color(GlobalVars.r, GlobalVars.g, GlobalVars.b)
+	
+	#rerandomizing the color so the multicolor actually shows up
+	GlobalVars.tr = rng.randf()
+	GlobalVars.tg = rng.randf()
+	GlobalVars.tb = rng.randf()
+	$rareTrait/traitTwo.self_modulate = Color(GlobalVars.tr, GlobalVars.tg, GlobalVars.tb)
+	
+	#changing the timer's time based on itemId
+	var time = changeTime(GlobalVars.item_id)
+	
+	$Timer.wait_time = time;
+	$Timer.start();
+	$waitingLabel.text = "Waiting..."
+
+func clearCrystal():
 	#remove old stuff
+	$sparkleAnim.hide()
 	$crystalSprite.texture = null;
 	$shadeSprite.texture = null;
 	$detailSprite.texture = null;
@@ -43,29 +69,6 @@ func createCrystal():
 	get_node("rareTrait/traitOne").set_flip_v(false)
 	get_node("rareTrait/traitTwo").set_flip_v(false)
 	$rareLabel.text = ""
-	
-	var rng = RandomNumberGenerator.new()
-	rng.randomize()
-	var r = rng.randf()
-	var g = rng.randf()
-	var b = rng.randf()
-	$crystalSprite.self_modulate = Color(r, g, b)
-	$shadeSprite.self_modulate = Color(r, g, b)
-	$rareTrait/traitOne.self_modulate = Color(r, g, b)
-	
-	#rerandomizing the color so the multicolor actually shows up
-	r = rng.randf()
-	g = rng.randf()
-	b = rng.randf()
-	$rareTrait/traitTwo.self_modulate = Color(r, g, b)
-	
-	#changing the timer's time based on itemId
-	var time = changeTime(GlobalVars.item_id)
-	
-	$Timer.wait_time = time;
-	$Timer.start();
-	$waitingLabel.text = "Waiting..."
-
 
 func change_texture(itemNo) :
 	if(itemNo == 0):
@@ -157,3 +160,28 @@ func randomTrait(one, two, three, itemNo):
 			print("-sapphire 3")
 		if(itemNo == 4):
 			print("-onyx 3")
+
+func _on_keep_button_pressed():
+	$keepButton.hide()
+	$deleteButton.hide()
+	GlobalVars.keep.emit()
+	clearCrystal()
+
+func _on_delete_button_pressed():
+	$keepButton.hide()
+	$deleteButton.hide()
+	GlobalVars.item_id = -1 
+	GlobalVars.isFlipped = false
+	
+	GlobalVars.r
+	GlobalVars.g
+	GlobalVars.b
+	
+	GlobalVars.tr
+	GlobalVars.tg
+	GlobalVars.tb
+	
+	GlobalVars.one = false
+	GlobalVars.two = false
+	GlobalVars.three = false
+	clearCrystal()

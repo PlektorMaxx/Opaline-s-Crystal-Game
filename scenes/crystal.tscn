@@ -1,7 +1,37 @@
-[gd_scene load_steps=3 format=3 uid="uid://cpv578jpvdobf"]
+[gd_scene load_steps=10 format=3 uid="uid://cpv578jpvdobf"]
 
 [ext_resource type="Script" path="res://scripts/crystal.gd" id="1_g3fsg"]
 [ext_resource type="Script" path="res://scripts/Timer.gd" id="2_u2mq1"]
+[ext_resource type="Texture2D" uid="uid://88vtyny8mf5h" path="res://assets/sparkle1.png" id="3_svvg1"]
+[ext_resource type="Texture2D" uid="uid://bt1d25h3uj2j6" path="res://assets/sparkle2.png" id="4_wky8x"]
+[ext_resource type="Texture2D" uid="uid://p0yl6vr1uw7b" path="res://assets/sparkle3.png" id="5_0ntxl"]
+[ext_resource type="Texture2D" uid="uid://cxfapt1bcuix1" path="res://assets/sparkle4.png" id="6_sdk7h"]
+[ext_resource type="Texture2D" uid="uid://buhb3hdxcn8u6" path="res://assets/sparkle5.png" id="7_03e0b"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5pmg8"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_svvg1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_wky8x")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_0ntxl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_sdk7h")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_03e0b")
+}],
+"loop": true,
+"name": &"sparkle",
+"speed": 8.0
+}]
+
+[sub_resource type="GDScript" id="GDScript_if621"]
 
 [node name="crystal" type="Node2D"]
 position = Vector2(505, 385)
@@ -23,5 +53,13 @@ script = ExtResource("2_u2mq1")
 [node name="detailSprite" type="Sprite2D" parent="."]
 
 [node name="shadeSprite" type="Sprite2D" parent="."]
+
+[node name="sparkleSprite" type="Sprite2D" parent="."]
+visible = false
+
+[node name="sparkleAnim" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_5pmg8")
+animation = &"sparkle"
+script = SubResource("GDScript_if621")
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

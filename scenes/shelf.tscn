@@ -1,0 +1,47 @@
+[gd_scene load_steps=4 format=3 uid="uid://wsoiywxyydlx"]
+
+[ext_resource type="Script" path="res://scripts/shelf-code.gd" id="1_bfgc3"]
+[ext_resource type="Texture2D" uid="uid://enror3dcxgou" path="res://assets/shelf.png" id="1_kb5nv"]
+[ext_resource type="PackedScene" uid="uid://b7vjnw3gfhixf" path="res://scenes/crystal_place.tscn" id="4_byil5"]
+
+[node name="shelf" type="TextureButton"]
+script = ExtResource("1_bfgc3")
+
+[node name="crystalOrganizer" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_right = 215.0
+offset_bottom = 165.0
+
+[node name="shelfSprite" type="Sprite2D" parent="."]
+position = Vector2(107.5, 82.5)
+texture = ExtResource("1_kb5nv")
+
+[node name="crystalPlace" parent="." instance=ExtResource("4_byil5")]
+layout_mode = 0
+offset_left = 22.0
+offset_top = 60.0
+offset_right = 30.0
+offset_bottom = 68.0
+
+[node name="crystalPlace2" parent="." instance=ExtResource("4_byil5")]
+layout_mode = 0
+offset_left = 76.0
+offset_top = 60.0
+offset_right = 84.0
+offset_bottom = 68.0
+
+[node name="crystalPlace3" parent="." instance=ExtResource("4_byil5")]
+layout_mode = 0
+offset_left = 130.0
+offset_top = 60.0
+offset_right = 138.0
+offset_bottom = 68.0
+
+[node name="crystalPlace4" parent="." instance=ExtResource("4_byil5")]
+layout_mode = 0
+offset_left = 184.0
+offset_top = 60.0
+offset_right = 192.0
+offset_bottom = 68.0
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]

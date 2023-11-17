@@ -1,0 +1,21 @@
+[gd_scene load_steps=2 format=3 uid="uid://b7vjnw3gfhixf"]
+
+[ext_resource type="Script" path="res://scripts/crystal_place.gd" id="1_1pk2w"]
+
+[node name="crystalPlace" type="Button"]
+offset_right = 8.0
+offset_bottom = 8.0
+script = ExtResource("1_1pk2w")
+metadata/_edit_group_ = true
+
+[node name="baseSprite" type="Sprite2D" parent="."]
+
+[node name="rare1" type="Sprite2D" parent="."]
+
+[node name="rare2" type="Sprite2D" parent="."]
+
+[node name="detail" type="Sprite2D" parent="."]
+
+[node name="shadow" type="Sprite2D" parent="."]
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]
